@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>envConfigDialog</class>
+ <widget class="QDialog" name="envConfigDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>340</width>
+    <height>425</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>340</width>
+    <height>410</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Settings</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background: #2A2E37;</string>
+  </property>
+  <widget class="QTabWidget" name="tabbedConfig">
+   <property name="geometry">
+    <rect>
+     <x>5</x>
+     <y>10</y>
+     <width>333</width>
+     <height>411</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: #313640;
+color: rgb(199, 199, 199)</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="connectionConfig">
+    <attribute name="title">
+     <string>Connection Setup</string>
+    </attribute>
+    <widget class="QGroupBox" name="envConfigTab">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>9</y>
+       <width>321</width>
+       <height>181</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>320</width>
+       <height>140</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(14, 172, 186);</string>
+     </property>
+     <property name="title">
+      <string>Environment Variables:</string>
+     </property>
+     <widget class="QLineEdit" name="myIP">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>30</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="dragEnabled">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>ex.:192.168.43.87</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="masterIP">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>60</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);
+background: rgba(29, 222, 216, 0.1);</string>
+      </property>
+      <property name="placeholderText">
+       <string>ex.: 192.168.43.87</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="hostname">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>118</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="placeholderText">
+       <string>ex.:192.168.43.87</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="nameSpace">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>148</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="placeholderText">
+       <string>robot_0</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rosMyIPLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>32</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>ROS_MY_IP:</string>
+      </property>
+      <property name="buddy">
+       <cstring>myIP</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rosMasterIPLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>62</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>MASTER_IP:</string>
+      </property>
+      <property name="buddy">
+       <cstring>masterIP</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rosHostnameLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>120</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>HOSTNAME:</string>
+      </property>
+      <property name="buddy">
+       <cstring>hostname</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rosNamespaceLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>150</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>NAMESPACE:</string>
+      </property>
+      <property name="buddy">
+       <cstring>nameSpace</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="rosMasterIURILabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>90</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>MASTER_URI:</string>
+      </property>
+      <property name="buddy">
+       <cstring>masterURI</cstring>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="masterURI">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>88</y>
+        <width>231</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="placeholderText">
+       <string>http://localhost:11311</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>200</y>
+       <width>320</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(14, 172, 186);</string>
+     </property>
+     <property name="title">
+      <string>SSH Configuration:</string>
+     </property>
+     <widget class="QLineEdit" name="user">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>58</y>
+        <width>210</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="placeholderText">
+       <string>turtlebot</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="password">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>88</y>
+        <width>210</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="placeholderText">
+       <string>turtlebot</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="portLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>120</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>PORT:</string>
+      </property>
+      <property name="buddy">
+       <cstring>port</cstring>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="port">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>118</y>
+        <width>210</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::PasswordEchoOnEdit</enum>
+      </property>
+      <property name="placeholderText">
+       <string>80</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="userLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>60</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>USER:</string>
+      </property>
+      <property name="buddy">
+       <cstring>user</cstring>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="turtlebotIP">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>28</y>
+        <width>210</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="placeholderText">
+       <string>192.168.43.87</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="passwordLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>90</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>PASSWORD:</string>
+      </property>
+      <property name="buddy">
+       <cstring>password</cstring>
+      </property>
+     </widget>
+     <widget class="QLabel" name="turtlebotIPLabel">
+      <property name="geometry">
+       <rect>
+        <x>5</x>
+        <y>30</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(199, 199, 199);</string>
+      </property>
+      <property name="text">
+       <string>TURTLEBOT IP:</string>
+      </property>
+      <property name="buddy">
+       <cstring>turtlebotIP</cstring>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>350</y>
+       <width>171</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="defaultButton">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>355</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>Default</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="othersTab">
+    <attribute name="title">
+     <string>Perspective and Others</string>
+    </attribute>
+    <widget class="QLineEdit" name="rosSource">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>50</y>
+       <width>221</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="placeholderText">
+      <string>ex.:/opt/ros/&lt;distro&gt;/setup.bash</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="perspectiveLabel">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>22</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>Perspective:</string>
+     </property>
+     <property name="buddy">
+      <cstring>myIP</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="perspective">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>20</y>
+       <width>221</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="placeholderText">
+      <string>ex.:/config/test.perspective</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="rosETCDirectory">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>80</y>
+       <width>221</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="placeholderText">
+      <string>ex.:/opt/ros/indigo/etc/ros</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rosSourceLabel">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>52</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>ROS_SOURCE:</string>
+     </property>
+     <property name="buddy">
+      <cstring>masterIP</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rosETCDirectoryLabel">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>82</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>ROS_ETC:</string>
+     </property>
+     <property name="buddy">
+      <cstring>hostname</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="rosRoot">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>110</y>
+       <width>221</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="placeholderText">
+      <string>ex.:/opt/ros/indigo/share/ros</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="rosRootLabel">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>112</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>ROS_ROOT:</string>
+     </property>
+     <property name="buddy">
+      <cstring>nameSpace</cstring>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="defaultButtonTab2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>355</y>
+       <width>80</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="text">
+      <string>Default</string>
+     </property>
+    </widget>
+    <widget class="QDialogButtonBox" name="buttonBox_2">
+     <property name="geometry">
+      <rect>
+       <x>125</x>
+       <y>355</y>
+       <width>166</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(199, 199, 199);</string>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>envConfigDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>envConfigDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>myIP</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>404</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>myIP</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>290</x>
+     <y>388</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>masterIP</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>279</x>
+     <y>400</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>hostname</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>267</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>305</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>nameSpace</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>271</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>304</x>
+     <y>207</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>turtlebotIP</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>user</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>274</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>317</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>password</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>286</x>
+     <y>404</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>322</x>
+     <y>338</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>port</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>297</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>325</x>
+     <y>368</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>masterIP</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>hostname</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>407</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>175</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>nameSpace</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>400</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>181</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>turtlebotIP</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>156</x>
+     <y>270</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>user</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>182</x>
+     <y>304</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButton</sender>
+   <signal>clicked()</signal>
+   <receiver>password</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>86</x>
+     <y>406</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>174</x>
+     <y>333</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tabbedConfig</sender>
+   <signal>currentChanged(int)</signal>
+   <receiver>port</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>395</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>191</x>
+     <y>375</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>masterURI</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>265</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox_2</sender>
+   <signal>accepted()</signal>
+   <receiver>perspective</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>264</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox_2</sender>
+   <signal>accepted()</signal>
+   <receiver>rosSource</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>240</x>
+     <y>403</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>263</x>
+     <y>92</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox_2</sender>
+   <signal>accepted()</signal>
+   <receiver>rosETCDirectory</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>408</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox_2</sender>
+   <signal>accepted()</signal>
+   <receiver>rosRoot</receiver>
+   <slot>copy()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>280</x>
+     <y>402</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>280</x>
+     <y>154</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButtonTab2</sender>
+   <signal>clicked()</signal>
+   <receiver>perspective</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButtonTab2</sender>
+   <signal>clicked()</signal>
+   <receiver>rosSource</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>96</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButtonTab2</sender>
+   <signal>clicked()</signal>
+   <receiver>rosETCDirectory</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>400</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>defaultButtonTab2</sender>
+   <signal>clicked()</signal>
+   <receiver>rosRoot</receiver>
+   <slot>redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>57</x>
+     <y>398</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,71 @@
+URxvt.perl-ext-common : tabbed, clipboard, url-select,keyboard-select, default, matcher
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+Xft.rgba: rgba
+Xft.antialias: 1
+URxvt*dynamicColors: on
+URxvt.saveLines: 5000
+URxvt.scrollBar: false
+URxvt.scrollstyle: plain
+URxvt.transparent: false
+URxvt.letterSpace: -5
+URxvt.font: xft:monaco:size=9
+
+!! Theme
+*.boldMode: true
+*.colorBDMode: false
+
+#define col2 #B73C33
+#define col3 #AD6143
+#define col4 #A8A392
+#define col5 #C08552
+#define col6 #aa632f
+#define col7 #5D5E5A
+#define col8 #D8C5B8
+
+*.foreground:   #1DDED8
+*.background:   #2A2E37
+*.cursorColor:  col8
+*.cursorBlink:  true
+
+*.color0:       #2A2E37
+*.color1:       col2
+*.color2:       col3
+*.color3:       col4
+*.color4:       col5
+*.color5:       col6
+*.color6:       col7
+*.color7:       col8
+*.color8:       col1
+*.color9:       col2
+*.color10:      col3
+*.color11:      col4
+*.color12:      col5
+*.color13:      col6
+*.color14:      col7
+*.color15: 	col8
+
+!! Tabbed
+
+URxvt.tabbed.tabbar-fg : -2
+URxvt.tabbed.tabbar-bg : -1
+URxvt.tabbed.tab-fg : -1
+URxvt.tabbed.tab-bg : -2
+
+
+!! Common Keybinds for Navigations
+!URxvt.keysym.Control-Up: \033[1;5A
+!URxvt.keysym.Control-Down: \033[1;5B
+!URxvt.keysym.Control-Right: \033[1;5C
+!URxvt.keysym.Control-Left: \033[1;5D
+
+!! Copy Paste & Other Extensions
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.C-Delete: perl:matcher:last
+URxvt.keysym.M-Delete: perl:matcher:list
+URxvt.matcher.rend.0: Uline Bold fg5
