@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="Base">
+   <property name="styleSheet">
+    <string notr="true">background: #2A2E37;</string>
+   </property>
+   <widget class="QFrame" name="logoFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(25, 27, 33, 0.2);
+image: url(:/newPrefix/LogoLaser.png);</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
+   </widget>
+   <widget class="QFrame" name="lateralMenuFrame">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>120</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #313640;
+</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_3"/>
+   </widget>
+   <widget class="Line" name="MenuLine">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>0</y>
+      <width>2</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(41, 63, 71, 0.75);</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="homeButton">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>200</y>
+      <width>110</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Home</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Home.png</normaloff>:/newPrefix/Home.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>45</width>
+      <height>45</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="dataButton">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>300</y>
+      <width>110</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: white;
+</string>
+    </property>
+    <property name="text">
+     <string>Data</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Data.png</normaloff>:/newPrefix/Data.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>45</width>
+      <height>45</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="adhocButton">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>400</y>
+      <width>110</width>
+      <height>70</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Ad-hoc</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Conection.png</normaloff>:/newPrefix/Conection.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>45</width>
+      <height>45</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="configButton">
+    <property name="geometry">
+     <rect>
+      <x>1070</x>
+      <y>40</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background: rgba(41, 63, 71, 0.75);</string>
+    </property>
+    <property name="text">
+     <string>Config</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Config.png</normaloff>:/newPrefix/Config.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="mailButton">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>40</y>
+      <width>81</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+background: rgba(41, 63, 71, 0.75);</string>
+    </property>
+    <property name="text">
+     <string>Mail</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Contact.png</normaloff>:/newPrefix/Contact.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="logoButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>540</y>
+      <width>100</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+font: 7pt &quot;Sans Serif&quot;;
+background: rgba(41, 63, 71, 0.75);</string>
+    </property>
+    <property name="text">
+     <string>PPGI UFPB</string>
+    </property>
+    <property name="icon">
+     <iconset resource="Vectors/Logo_Vectors.qrc">
+      <normaloff>:/newPrefix/Ufpb.png</normaloff>:/newPrefix/Ufpb.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="Line" name="SuperiorLine">
+    <property name="geometry">
+     <rect>
+      <x>121</x>
+      <y>120</y>
+      <width>1280</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #1DDED8;</string>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Sunken</enum>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="InferiorLine">
+    <property name="geometry">
+     <rect>
+      <x>121</x>
+      <y>460</y>
+      <width>1280</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #1DDED8;</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="LateraLine">
+    <property name="geometry">
+     <rect>
+      <x>1061</x>
+      <y>0</y>
+      <width>2</width>
+      <height>462</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #1DDED8;</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="robotStateLabel">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>122</y>
+      <width>218</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="robotStateTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>65</x>
+       <y>9</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+font: 10pt &quot;Khmer OS System&quot;;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>ROBOT STATE</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="simulationLabel">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>240</y>
+      <width>218</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="simulationTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>75</x>
+       <y>9</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+font: 9pt &quot;Khmer OS System&quot;;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>SIMULATION</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="toolsLabel">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>360</y>
+      <width>218</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="toolsTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>9</y>
+       <width>51</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+font: 9pt &quot;Khmer OS System&quot;;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>TOOLS</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="mainControlFrame">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>10</y>
+      <width>218</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="mainTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>65</x>
+       <y>5</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>MAIN CONTROL</string>
+     </property>
+    </widget>
+    <widget class="Line" name="mainLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>56</x>
+       <y>20</y>
+       <width>110</width>
+       <height>1</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="playButton">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>30</y>
+       <width>51</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>PLAY</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="pauseButton">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>70</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>PAUSE</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="stopButton">
+     <property name="geometry">
+      <rect>
+       <x>25</x>
+       <y>50</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+font: 9pt &quot;Sans Serif&quot;;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>STOP</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="resetMainButton">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>38</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(193, 69, 69);
+font: 75 9pt &quot;Clean&quot;;
+background: rgba(25, 27, 33, 0.2);</string>
+     </property>
+     <property name="text">
+      <string>RESET</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reloadMainButton">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>62</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(193, 69, 69);
+font: 75 9pt &quot;Clean&quot;;
+background: rgba(25, 27, 33, 0.2);</string>
+     </property>
+     <property name="text">
+      <string>RELOAD</string>
+     </property>
+    </widget>
+    <widget class="Line" name="mainLeftLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>107</x>
+       <y>38</y>
+       <width>2</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #313640;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="Line" name="mainRightLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>38</y>
+       <width>2</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #313640;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="controllerFrame">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>10</y>
+      <width>218</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="controllerTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>5</y>
+       <width>91</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>CONTROLLER</string>
+     </property>
+    </widget>
+    <widget class="Line" name="controllerLine">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>20</y>
+       <width>110</width>
+       <height>1</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="fuzzyControllerButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);
+
+</string>
+     </property>
+     <property name="text">
+      <string>Fuzzy</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="mpcControllerButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);
+</string>
+     </property>
+     <property name="text">
+      <string>MPC</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="gotoControllerButton">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>GotoXYTeta</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="pwmButton">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>30</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>PWM</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="otherControllerButton">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>50</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>Other</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="noneControllerButton">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>70</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>None</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTabWidget" name="terminalWidget">
+    <property name="geometry">
+     <rect>
+      <x>121</x>
+      <y>462</y>
+      <width>1158</width>
+      <height>139</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>1158</width>
+      <height>139</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1158</width>
+      <height>139</height>
+     </size>
+    </property>
+    <property name="tabPosition">
+     <enum>QTabWidget::South</enum>
+    </property>
+    <widget class="QWidget" name="urxvtWidget">
+     <attribute name="title">
+      <string>Terminal</string>
+     </attribute>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="robotStateFrame">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>152</y>
+      <width>215</width>
+      <height>88</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QRadioButton" name="robotStartButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(255, 255, 255)</string>
+     </property>
+     <property name="text">
+      <string>START</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="robotDownButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;
+</string>
+     </property>
+     <property name="text">
+      <string>SHUT DOWN</string>
+     </property>
+    </widget>
+    <widget class="Line" name="robotStateLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>113</x>
+       <y>21</y>
+       <width>2</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rqtConsoleButton">
+     <property name="geometry">
+      <rect>
+       <x>119</x>
+       <y>21</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>RQT Console</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rqtLoggerButton">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>48</y>
+       <width>91</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>RQT Logger</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="simulationFrame">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>270</y>
+      <width>215</width>
+      <height>90</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="Line" name="simulationLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>83</x>
+       <y>21</y>
+       <width>2</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rvizButton">
+     <property name="geometry">
+      <rect>
+       <x>89</x>
+       <y>21</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>RVIZ INTERFACE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="gmappButton">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>48</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>GMAPP INTERFACE</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="mapShowButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>35</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>MAP</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="visionShowButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>55</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>VISION</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="showSimulationButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>15</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>SHOW</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="toolsFrame">
+    <property name="geometry">
+     <rect>
+      <x>1063</x>
+      <y>390</y>
+      <width>215</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="Line" name="toolsLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>83</x>
+       <y>10</y>
+       <width>2</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rqtBagButton">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>10</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>RQT BAG FILE</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="rqtDashboardButton">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>37</y>
+       <width>121</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: rgba(29, 222, 216, 0.1);
+color: rgb(22, 22, 22)</string>
+     </property>
+     <property name="text">
+      <string>RQT DASHBOARD</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="joystickButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>15</y>
+       <width>61</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>JOY</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="teleopButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>35</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: white;</string>
+     </property>
+     <property name="text">
+      <string>TELEOP</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="valuesFrame">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>10</y>
+      <width>218</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: rgba(29, 222, 216, 0.1);</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLabel" name="ValueTextLabel">
+     <property name="geometry">
+      <rect>
+       <x>68</x>
+       <y>5</y>
+       <width>101</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: white;</string>
+     </property>
+     <property name="text">
+      <string>ROBOT VALUES</string>
+     </property>
+    </widget>
+    <widget class="Line" name="valueLineFrame">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>20</y>
+       <width>110</width>
+       <height>1</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: #1DDED8;</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="XValue">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>33</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="XLabel">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>35</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>X:</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="YLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>63</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="YValue">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>65</y>
+       <width>16</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>Y:</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="velocityValue">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>33</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="velocityLabel">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>35</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>Velocity:</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="velocityValue_2">
+     <property name="geometry">
+      <rect>
+       <x>165</x>
+       <y>63</y>
+       <width>31</width>
+       <height>20</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="velocityLabel_2">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>65</y>
+       <width>61</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background: transparent;
+color: rgb(206, 255, 188);</string>
+     </property>
+     <property name="text">
+      <string>Battery:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="simulationWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>121</x>
+      <y>125</y>
+      <width>551</width>
+      <height>333</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="mapWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>673</x>
+      <y>126</y>
+      <width>388</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="kinectWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>673</x>
+      <y>340</y>
+      <width>388</width>
+      <height>120</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-color: rgb(85, 255, 255);</string>
+    </property>
+   </widget>
+   <zorder>lateralMenuFrame</zorder>
+   <zorder>logoFrame</zorder>
+   <zorder>MenuLine</zorder>
+   <zorder>homeButton</zorder>
+   <zorder>dataButton</zorder>
+   <zorder>adhocButton</zorder>
+   <zorder>configButton</zorder>
+   <zorder>mailButton</zorder>
+   <zorder>logoButton</zorder>
+   <zorder>SuperiorLine</zorder>
+   <zorder>InferiorLine</zorder>
+   <zorder>LateraLine</zorder>
+   <zorder>robotStateLabel</zorder>
+   <zorder>simulationLabel</zorder>
+   <zorder>toolsLabel</zorder>
+   <zorder>mainControlFrame</zorder>
+   <zorder>controllerFrame</zorder>
+   <zorder>terminalWidget</zorder>
+   <zorder>robotStateFrame</zorder>
+   <zorder>simulationFrame</zorder>
+   <zorder>toolsFrame</zorder>
+   <zorder>valuesFrame</zorder>
+   <zorder>simulationWidget</zorder>
+   <zorder>mapWidget</zorder>
+   <zorder>kinectWidget</zorder>
+  </widget>
+ </widget>
+ <resources>
+  <include location="Vectors/Logo_Vectors.qrc"/>
+ </resources>
+ <connections/>
+</ui>
