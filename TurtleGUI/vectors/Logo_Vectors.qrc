@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="newPrefix">
+    <file>Ufpb.png</file>
+    <file>ShellWhite.png</file>
+    <file>LogoLaser.png</file>
+    <file>InternetSignalMedium.png</file>
+    <file>InternetSignalLow.png</file>
+    <file>InternetSignalHigh.png</file>
+    <file>Home.png</file>
+    <file>Data.png</file>
+    <file>Contact.png</file>
+    <file>Config.png</file>
+    <file>Conection.png</file>
+    <file>BatteryMedium.png</file>
+    <file>BatteryLow.png</file>
+    <file>BatteryHigh.png</file>
+  </qresource>
+</RCC>
