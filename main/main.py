@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
 # !/usr/bin/env python2
 
 import sys
+import rospy
 import os
 import vectors
 import webbrowser
 import threading
 import subprocess
+import cv2
 from subprocess import call, Popen, PIPE, check_output
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QImage, QPixmap
 from concurrent.futures import ThreadPoolExecutor
 from concurrent.futures import ProcessPoolExecutor
 from settings import *
@@ -40,7 +42,7 @@ perspectiveLocation = root.findtext('PERSPECTIVE_LOCATION')
 rosSource = root.findtext("ROS_SOURCE")
 rosEtc = root.findtext('ROS_ETC_DIRECTORY')
 rosRoot = root.findtext('ROS_ROOT')
-# Values to Export into "~/.bashrc" 
+# Values to Export into "~/.bashrc"
 exportIP = str('ROS_IP='+myIP)
 exportMasterIP = str('MASTER_IP='+myIP)
 exportMasterIPURI = str('export ROS_MASTER_URI=http://$MASTER_IP:11311/')
@@ -58,15 +60,15 @@ class EmbTerminal(QtWidgets.QWidget):
         layout.addWidget(self.terminal)
         # Works also with urxvt:
         self.process.start('urxvt', ['-embed', str(int(self.winId()))])
-        self.setGeometry(121, 462, 1158, 200)
+        self.setGeometry(90, 460, 1160, 125)
 
 
 class InProgress(QtWidgets.QWidget):
     def __init__(self, parent=None):
         Error = QtWidgets.QMessageBox()
-        Error.setText('Desculpe, opção em desenvolvimento.')
+        Error.setText('Sorry, in development!')
         Error.setIcon(QtWidgets.QMessageBox.Information)
-        Error.setWindowTitle('Atenção!')
+        Error.setWindowTitle('Warning!')
         Error.show()
         Error.exec_()
 
@@ -74,9 +76,9 @@ class InProgress(QtWidgets.QWidget):
 class Homebox(QtWidgets.QWidget):
     def __init__(self, parent=None):
         HomeInfo = QMessageBox()
-        HomeInfo.setText("Você já está na aba HOME")
+        HomeInfo.setText("You're alrady in HOME")
         HomeInfo.setIcon(QMessageBox.Information)
-        HomeInfo.setWindowTitle("Atenção!")
+        HomeInfo.setWindowTitle("Warning!")
         HomeInfo.show()
         HomeInfo.exec_()
 
@@ -138,14 +140,14 @@ class Ui_MainWindow(object):
                                             stdin=PIPE, shell=True)
         rqtLoggerProcStdout = rqtLoggerProcess.communicate()[0].strip()
         print (rqtLoggerProcStdout)
-    
+
     def rvizGraphButton(self):
         self.rvizButton.setDown(True)
         QTimer.singleShot(5000, lambda: self.rvizButton.setDown(False))
         rvizCommand = 'rviz'
         rvizProcess = subprocess.Popen(rvizCommand, stdout=PIPE,
                                        stdin=PIPE, shell=True)
-    
+
     def gmappGraphButton(self):
         self.gmappButton.setDown(True)
         QTimer.singleShot(5000, lambda: self.gmappButton.setDown(False))
@@ -154,7 +156,7 @@ class Ui_MainWindow(object):
         gmappStartProcess = subprocess.Popen(gmappStartCommand, stdout=PIPE,
                                              stdin=PIPE, shell=True)
         gmappStartProcess = subprocess.Popen(gmappLaunchCommand, stdout=PIPE,
-                                             stdin=PIPE, shell=True)   
+                                             stdin=PIPE, shell=True)
 
     def mainState(self):
         if (self.playButton.isChecked() is True):
@@ -201,16 +203,13 @@ class Ui_MainWindow(object):
             self.robotStartButton.setDown(True)
             QTimer.singleShot(5000, lambda: self.robotStartButton.setDown(False))
             # For localserver use this code:
-            roscoreLaunch = 'roscore'
             minimalLaunch = 'roslaunch turtlebot_bringup minimal.launch '
-            # kinectLaunch = 'roslaunch turtlebot_bringup minimal.launch
+            kinectLaunch = 'roslaunch turtlebot_bringup 3dsensors.launch'
             # Using Popen instead of Call because the first one don't block the process
-            roscoreProcess = subprocess.Popen(roscoreLaunch, stdout=PIPE,
+            launchProcess = subprocess.Popen(minimalLaunch, stdout=PIPE,
                                                stdin=PIPE, shell=True)
-            nodeKillProcess = subprocess.Popen(minimalLaunch, stdout=PIPE,
-                                               stdin=PIPE, shell=True)
-            # masterKillProcess = subprocess.Popen(kinectLaunch, stdout=PIPE,
-            #                                      stdin=PIPE, shell=True)
+            sensorsProcess = subprocess.Popen(kinectLaunch, stdout=PIPE,
+                                              stdin=PIPE, shell=True)
         elif (self.robotDownButton.isChecked() is True):
             print('Shutting Down the Turtlebot...')
             self.robotDownButton.setDown(True)
@@ -229,20 +228,72 @@ class Ui_MainWindow(object):
 
     def tools(self):
         if (self.joystickButton.isChecked() is True):
-           print('Joystick Selected')
-           self.joystickButton.setDown(True)
-           QTimer.singleShot(5000, lambda: self.joystickButton.setDown(False))
-           joystickCommand = 'rqt_remocon'
-           nodeKillProcess = subprocess.Popen(joystickCommand, stdout=PIPE,
+            print('Joystick Selected')
+            self.joystickButton.setDown(True)
+            QTimer.singleShot(5000, lambda: self.joystickButton.setDown(False))
+            joystickCommand = 'rqt_remocon'
+            nodeKillProcess = subprocess.Popen(joystickCommand, stdout=PIPE,
                                               stdin=PIPE, shell=True)
-        
+
         elif (self.teleopButton.isChecked() is True):
-           print('Teleop Selected')
-           self.teleopButton.setDown(True)
-           QTimer.singleShot(5000, lambda: self.teleopButton.setDown(False))
-           teleopCommand = 'roslaunch turtlebot_teleop keyboard_teleop.launch'
-           nodeKillProcess = subprocess.Popen(teleopCommand, stdout=PIPE,
-                                              stdin=PIPE, shell=True)
+            print('Teleop Selected')
+            self.teleopButton.setDown(True)
+            QTimer.singleShot(5000, lambda: self.teleopButton.setDown(False))
+            teleopCommand = 'roslaunch turtlebot_teleop keyboard_teleop.launch'
+            nodeKillProcess = subprocess.Popen(teleopCommand, stdout=PIPE,
+                                                stdin=PIPE, shell=True)
+
+    def simulationCheckbox(self, state):
+
+        if state == QtCore.Qt.Checked:
+            print('Show Simulation Selected')
+            # release video capture
+            self.cap = cv2.VideoCapture(1)
+            self.cap.release()
+            # read image in BGR format
+            ret, image = self.cap.read()
+            # convert image to RGB format
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+            # get image infos
+            height, width, channel = image.shape
+            step = channel * width
+            # create QImage from image
+            qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
+            # show image in img_label
+            self.mapWidget.setPixmap(QPixmap.fromImage(qImg))
+        else:
+            print('Show Simulation Unchecked')
+            self.cap = cv2.VideoCapture(0)
+
+    def mapCheckbox(self, state):
+
+        if state == QtCore.Qt.Checked:
+            print('Show Map Selected')
+        else:
+            print('Show Map Unchecked')
+
+    def visionCheckbox(self, state):
+
+        if state == QtCore.Qt.Checked:
+            print('Show Vision Selected')
+        else:
+            print('Show Vision Unchecked')
+
+    def xLcdNumber(self):
+        xIntValue = float(0.0)
+        return xIntValue
+
+    def yLcdNumber(self):
+        yIntValue = float(0.0)
+        return yIntValue
+
+    def velocityLcdNumber(self):
+        velocityIntValue = float(0.0)
+        return velocityIntValue
+
+    def batteryLcdNumber(self):
+        batteryIntValue = int(0)
+        return batteryIntValue
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -270,7 +321,7 @@ class Ui_MainWindow(object):
         self.MenuLine.setFrameShadow(QtWidgets.QFrame.Raised)
         self.MenuLine.setFrameShape(QtWidgets.QFrame.VLine)
         self.MenuLine.setObjectName("MenuLine")
-        # Botão Home (Aba Lateral)
+        # Home Button (Aba Lateral)
         self.homeButton = QtWidgets.QCommandLinkButton(self.Base)
         self.homeButton.setGeometry(QtCore.QRect(5, 200, 110, 70))
         self.homeButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
@@ -281,7 +332,7 @@ class Ui_MainWindow(object):
         self.homeButton.setIconSize(QtCore.QSize(45, 45))
         self.homeButton.setObjectName("homeButton")
         self.homeButton.clicked.connect(Homebox)
-        # Botão Data (Aba Lateral)
+        # Data Button (Aba Lateral)
         self.dataButton = QtWidgets.QCommandLinkButton(self.Base)
         self.dataButton.setGeometry(QtCore.QRect(5, 300, 110, 70))
         self.dataButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
@@ -293,7 +344,7 @@ class Ui_MainWindow(object):
         self.dataButton.setIconSize(QtCore.QSize(45, 45))
         self.dataButton.setObjectName("dataButton")
         self.dataButton.clicked.connect(InProgress)
-        # Botão Ad-Hoc (Aba Lateral)
+        # Ad-Hoc Button (Aba Lateral)
         self.adhocButton = QtWidgets.QCommandLinkButton(self.Base)
         self.adhocButton.setGeometry(QtCore.QRect(5, 400, 110, 70))
         self.adhocButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
@@ -304,7 +355,7 @@ class Ui_MainWindow(object):
         self.adhocButton.setIconSize(QtCore.QSize(45, 45))
         self.adhocButton.setObjectName("adhocButton")
         self.adhocButton.clicked.connect(InProgress)
-        # Botão de Configuração
+        # Configuration Button
         self.configButton = QtWidgets.QCommandLinkButton(self.Base)
         self.configButton.setGeometry(QtCore.QRect(1070, 40, 100, 50))
         self.configButton.setStyleSheet("color: white;\n"
@@ -316,7 +367,7 @@ class Ui_MainWindow(object):
         self.configButton.setObjectName("configButton")
         self.configButton.setToolTip('Configure Enviroment and System Variables')
         self.configButton.clicked.connect(settings)
-        # Botão de E-mail
+        # E-mail Button
         self.mailButton = QtWidgets.QCommandLinkButton(self.Base)
         self.mailButton.setGeometry(QtCore.QRect(1180, 40, 81, 50))
         self.mailButton.setStyleSheet("color: white;\n"
@@ -328,7 +379,7 @@ class Ui_MainWindow(object):
         self.mailButton.setObjectName("mailButton")
         self.mailButton.setToolTip('Contact the LASER Laboratory')
         self.mailButton.clicked.connect(InProgress)
-        # Botão do Brasão da UFPB
+        # UFPB site Button
         self.logoButton = QtWidgets.QCommandLinkButton(self.Base)
         self.logoButton.setGeometry(QtCore.QRect(10, 540, 100, 50))
         self.logoButton.setStyleSheet("color: white;\n"
@@ -417,7 +468,7 @@ class Ui_MainWindow(object):
         self.mainLineFrame.setStyleSheet("background: #1DDED8;")
         self.mainLineFrame.setFrameShape(QtWidgets.QFrame.HLine)
         self.mainLineFrame.setFrameShadow(QtWidgets.QFrame.Sunken)
-        # Botão PLAY
+        # PLAY
         self.mainLineFrame.setObjectName("mainLineFrame")
         self.playButton = QtWidgets.QRadioButton(self.mainControlFrame)
         self.playButton.setGeometry(QtCore.QRect(25, 30, 51, 21))
@@ -426,7 +477,7 @@ class Ui_MainWindow(object):
         self.playButton.setObjectName("playButton")
         self.playButton.setChecked(False)
         self.playButton.toggled.connect(self.mainState)
-        # Botão PAUSE
+        # PAUSE
         self.pauseButton = QtWidgets.QRadioButton(self.mainControlFrame)
         self.pauseButton.setGeometry(QtCore.QRect(25, 70, 61, 21))
         self.pauseButton.setStyleSheet("background: transparent;\n"
@@ -434,7 +485,7 @@ class Ui_MainWindow(object):
         self.pauseButton.setObjectName("pauseButton")
         self.pauseButton.setChecked(False)
         self.pauseButton.toggled.connect(self.mainState)
-        # Botão STOP
+        # STOP
         self.stopButton = QtWidgets.QRadioButton(self.mainControlFrame)
         self.stopButton.setGeometry(QtCore.QRect(25, 50, 61, 21))
         self.stopButton.setStyleSheet("background: transparent;\n"
@@ -443,7 +494,7 @@ class Ui_MainWindow(object):
         self.stopButton.setObjectName("stopButton")
         self.pauseButton.setChecked(False)
         self.pauseButton.toggled.connect(self.mainState)
-        # Botão RESET
+        # RESET
         self.resetMainButton = QtWidgets.QPushButton(self.mainControlFrame)
         self.resetMainButton.setGeometry(QtCore.QRect(110, 38, 91, 23))
         self.resetMainButton.setStyleSheet("color: rgb(193, 69, 69);\n"
@@ -451,7 +502,7 @@ class Ui_MainWindow(object):
                                            "background: rgba(25, 27, 33, 0.2);")
         self.resetMainButton.setObjectName("resetMainButton")
         # self.resetMainButton.toggled.connect(InProgress)
-        # Botão RELOAD
+        # RELOAD
         self.reloadMainButton = QtWidgets.QPushButton(self.mainControlFrame)
         self.reloadMainButton.setGeometry(QtCore.QRect(110, 62, 91, 23))
         self.reloadMainButton.setStyleSheet("color: rgb(193, 69, 69);\n"
@@ -490,7 +541,7 @@ class Ui_MainWindow(object):
         self.controllerLine.setFrameShape(QtWidgets.QFrame.HLine)
         self.controllerLine.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.controllerLine.setObjectName("controllerLine")
-        # Botão FUZZY
+        # FUZZY
         self.fuzzyControllerButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.fuzzyControllerButton.setGeometry(QtCore.QRect(20, 30, 61, 21))
         self.fuzzyControllerButton.setStyleSheet("background: transparent;\n"
@@ -499,7 +550,7 @@ class Ui_MainWindow(object):
                                                  "")
         self.fuzzyControllerButton.setObjectName("fuzzyControllerButton")
         self.fuzzyControllerButton.toggled.connect(self.controlState)
-        # Botão MPC
+        # MPC
         self.mpcControllerButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.mpcControllerButton.setGeometry(QtCore.QRect(20, 50, 61, 21))
         self.mpcControllerButton.setStyleSheet("background: transparent;\n"
@@ -507,28 +558,28 @@ class Ui_MainWindow(object):
                                                "")
         self.mpcControllerButton.setObjectName("mpcControllerButton")
         self.mpcControllerButton.toggled.connect(self.controlState)
-        # Botão GotoXYTeta
+        # GotoXYTeta
         self.gotoControllerButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.gotoControllerButton.setGeometry(QtCore.QRect(20, 70, 91, 21))
         self.gotoControllerButton.setStyleSheet("background: transparent;\n"
                                                 "color: rgb(206, 255, 188);")
         self.gotoControllerButton.setObjectName("gotoControllerButton")
         self.gotoControllerButton.toggled.connect(self.controlState)
-        # Botão PWM
+        # PWM
         self.pwmButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.pwmButton.setGeometry(QtCore.QRect(130, 30, 61, 21))
         self.pwmButton.setStyleSheet("background: transparent;\n"
                                      "color: rgb(206, 255, 188);")
         self.pwmButton.setObjectName("pwmButton")
         self.pwmButton.toggled.connect(self.controlState)
-        # Botão OTHER
+        # OTHER
         self.otherControllerButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.otherControllerButton.setGeometry(QtCore.QRect(130, 50, 61, 21))
         self.otherControllerButton.setStyleSheet("background: transparent;\n"
                                                  "color: rgb(206, 255, 188);")
         self.otherControllerButton.setObjectName("otherControllerButton")
         self.otherControllerButton.toggled.connect(self.controlState)
-        # Botão NONE
+        # NONE
         self.noneControllerButton = QtWidgets.QRadioButton(self.controllerFrame)
         self.noneControllerButton.setGeometry(QtCore.QRect(130, 70, 61, 21))
         self.noneControllerButton.setStyleSheet("background: transparent;\n"
@@ -537,13 +588,18 @@ class Ui_MainWindow(object):
         self.noneControllerButton.toggled.connect(self.controlState)
         # Widget do Terminal Embedded
         self.terminalWidget = QtWidgets.QTabWidget(self.Base)
-        self.terminalWidget.setGeometry(QtCore.QRect(121, 462, 1158, 139))
-        self.terminalWidget.setMinimumSize(QtCore.QSize(1158, 139))
-        self.terminalWidget.setMaximumSize(QtCore.QSize(1158, 139))
+        self.terminalWidget.setGeometry(QtCore.QRect(121, 462, 1160, 141))
         self.terminalWidget.setTabPosition(QtWidgets.QTabWidget.South)
         self.terminalWidget.setObjectName("terminalWidget")
-        self.urxvtWidget = QtWidgets.QWidget()
-        self.urxvtWidget.setObjectName("urxvtWidget")
+        self.terminalWidget.addTab(EmbTerminal(), "Terminal")
+        #
+        self.terminalWidget = QtWidgets.QTabWidget(self.Base)
+        self.terminalWidget.setGeometry(QtCore.QRect(121, 462, 1160, 141))
+        self.terminalWidget.setTabPosition(QtWidgets.QTabWidget.South)
+        self.terminalWidget.setObjectName("terminalWidget")
+        self.terminalFrame = QtWidgets.QWidget()
+        self.terminalFrame.setObjectName("terminalFrame")
+        # Inicia o terminal no app
         self.terminalWidget.addTab(EmbTerminal(), "Terminal")
         # Design do Label Robot State
         self.robotStateFrame = QtWidgets.QFrame(self.Base)
@@ -564,7 +620,7 @@ class Ui_MainWindow(object):
                                            "")
         self.robotDownButton.setObjectName("robotDownButton")
         self.robotDownButton.toggled.connect(self.robotState)
-        # Robot State Line Design 
+        # Robot State Line Design
         self.robotStateLineFrame = QtWidgets.QFrame(self.robotStateFrame)
         self.robotStateLineFrame.setGeometry(QtCore.QRect(113, 21, 2, 50))
         self.robotStateLineFrame.setStyleSheet("background: #1DDED8;")
@@ -597,14 +653,14 @@ class Ui_MainWindow(object):
         self.simulationLineFrame.setFrameShape(QtWidgets.QFrame.VLine)
         self.simulationLineFrame.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.simulationLineFrame.setObjectName("simulationLineFrame")
-        # Botão RVIZ
+        # RVIZ
         self.rvizButton = QtWidgets.QPushButton(self.simulationFrame)
         self.rvizButton.setGeometry(QtCore.QRect(89, 21, 121, 23))
         self.rvizButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
                                       "color: rgb(22, 22, 22)")
         self.rvizButton.setObjectName("rvizButton")
         self.rvizButton.clicked.connect(self.rvizGraphButton)
-        # Botão GMAPP
+        # GMAPP
         self.gmappButton = QtWidgets.QPushButton(self.simulationFrame)
         self.gmappButton.setGeometry(QtCore.QRect(90, 48, 121, 23))
         self.gmappButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
@@ -616,17 +672,20 @@ class Ui_MainWindow(object):
         self.mapShowButton.setGeometry(QtCore.QRect(10, 35, 61, 21))
         self.mapShowButton.setStyleSheet("color: white;")
         self.mapShowButton.setObjectName("mapShowButton")
+        self.mapShowButton.stateChanged.connect(self.mapCheckbox)
         # Checkbox SHOW VISION
         self.visionShowButton = QtWidgets.QCheckBox(self.simulationFrame)
         self.visionShowButton.setGeometry(QtCore.QRect(10, 55, 61, 21))
         self.visionShowButton.setStyleSheet("color: white;")
         self.visionShowButton.setObjectName("visionShowButton")
+        self.visionShowButton.stateChanged.connect(self.visionCheckbox)
         # Checkbox SHOW SIMULATION
         self.showSimulationButton = QtWidgets.QCheckBox(self.simulationFrame)
         self.showSimulationButton.setGeometry(QtCore.QRect(10, 15, 61, 21))
         self.showSimulationButton.setStyleSheet("color: white;")
         self.showSimulationButton.setObjectName("showSimulationButton")
-        # Design do Frame TOOLS 
+        self.showSimulationButton.stateChanged.connect(self.simulationCheckbox)
+        # Design do Frame TOOLS
         self.toolsFrame = QtWidgets.QFrame(self.Base)
         self.toolsFrame.setGeometry(QtCore.QRect(1063, 390, 215, 71))
         self.toolsFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -638,33 +697,33 @@ class Ui_MainWindow(object):
         self.toolsLineFrame.setFrameShape(QtWidgets.QFrame.VLine)
         self.toolsLineFrame.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.toolsLineFrame.setObjectName("toolsLineFrame")
-        # Botão RQT BAG
+        # RQT BAG
         self.rqtBagButton = QtWidgets.QPushButton(self.toolsFrame)
         self.rqtBagButton.setGeometry(QtCore.QRect(90, 10, 121, 23))
         self.rqtBagButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
                                         "color: rgb(22, 22, 22)")
         self.rqtBagButton.setObjectName("rqtBagButton")
         self.rqtBagButton.clicked.connect(self.rqtBagTool)
-        # Botão RQT Dashboard
+        # RQT Dashboard
         self.rqtDashboardButton = QtWidgets.QPushButton(self.toolsFrame)
         self.rqtDashboardButton.setGeometry(QtCore.QRect(90, 37, 121, 23))
         self.rqtDashboardButton.setStyleSheet("background: rgba(29, 222, 216, 0.1);\n"
                                               "color: rgb(22, 22, 22)")
         self.rqtDashboardButton.setObjectName("rqtDashboardButton")
         self.rqtDashboardButton.clicked.connect(self.rqtDashboardTool)
-        # Botão JOYSTICK
+        # JOYSTICK
         self.joystickButton = QtWidgets.QRadioButton(self.toolsFrame)
         self.joystickButton.setGeometry(QtCore.QRect(10, 15, 61, 21))
         self.joystickButton.setStyleSheet("color: white;")
         self.joystickButton.setObjectName("joystickButton")
         self.joystickButton.toggled.connect(self.tools)
-        # Botão TELEOP
+        # TELEOP
         self.teleopButton = QtWidgets.QRadioButton(self.toolsFrame)
         self.teleopButton.setGeometry(QtCore.QRect(10, 35, 71, 21))
         self.teleopButton.setStyleSheet("color: white;")
         self.teleopButton.setObjectName("teleopButton")
         self.teleopButton.toggled.connect(self.tools)
-        # Design do frame VALUES
+        # Design do frame ROBOT VALUES
         self.valuesFrame = QtWidgets.QFrame(self.Base)
         self.valuesFrame.setGeometry(QtCore.QRect(750, 10, 218, 101))
         self.valuesFrame.setStyleSheet("background: rgba(29, 222, 216, 0.1);")
@@ -682,14 +741,17 @@ class Ui_MainWindow(object):
         self.valueLineFrame.setFrameShape(QtWidgets.QFrame.HLine)
         self.valueLineFrame.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.valueLineFrame.setObjectName("valueLineFrame")
+        # Design do LCD e Label "X"
         self.XValue = QtWidgets.QLCDNumber(self.valuesFrame)
         self.XValue.setGeometry(QtCore.QRect(50, 33, 31, 20))
         self.XValue.setObjectName("XValue")
+        self.XValue.display(self.xLcdNumber())
         self.XLabel = QtWidgets.QLabel(self.valuesFrame)
         self.XLabel.setGeometry(QtCore.QRect(30, 35, 16, 16))
         self.XLabel.setStyleSheet("background: transparent;\n"
                                   "color: rgb(206, 255, 188);")
         self.XLabel.setObjectName("XLabel")
+        # Design do LCD e Label "Y"
         self.YLabel = QtWidgets.QLCDNumber(self.valuesFrame)
         self.YLabel.setGeometry(QtCore.QRect(50, 63, 31, 20))
         self.YLabel.setObjectName("YLabel")
@@ -698,6 +760,7 @@ class Ui_MainWindow(object):
         self.YValue.setStyleSheet("background: transparent;\n"
                                   "color: rgb(206, 255, 188);")
         self.YValue.setObjectName("YValue")
+        # Design do LCD e Label "VELOCITY"
         self.velocityValue = QtWidgets.QLCDNumber(self.valuesFrame)
         self.velocityValue.setGeometry(QtCore.QRect(165, 33, 31, 20))
         self.velocityValue.setObjectName("velocityValue")
@@ -706,20 +769,24 @@ class Ui_MainWindow(object):
         self.velocityLabel.setStyleSheet("background: transparent;\n"
                                          "color: rgb(206, 255, 188);")
         self.velocityLabel.setObjectName("velocityLabel")
-        self.velocityValue_2 = QtWidgets.QLCDNumber(self.valuesFrame)
-        self.velocityValue_2.setGeometry(QtCore.QRect(165, 63, 31, 20))
-        self.velocityValue_2.setObjectName("velocityValue_2")
-        self.velocityLabel_2 = QtWidgets.QLabel(self.valuesFrame)
-        self.velocityLabel_2.setGeometry(QtCore.QRect(110, 65, 61, 16))
-        self.velocityLabel_2.setStyleSheet("background: transparent;\n"
+        # Design do LCD e Label "Battery"
+        self.batteryValue = QtWidgets.QLCDNumber(self.valuesFrame)
+        self.batteryValue.setGeometry(QtCore.QRect(165, 63, 31, 20))
+        self.batteryValue.setObjectName("batteryValue")
+        self.batteryLabel = QtWidgets.QLabel(self.valuesFrame)
+        self.batteryLabel.setGeometry(QtCore.QRect(110, 65, 61, 16))
+        self.batteryLabel.setStyleSheet("background: transparent;\n"
                                            "color: rgb(206, 255, 188);")
-        self.velocityLabel_2.setObjectName("velocityLabel_2")
+        self.batteryLabel.setObjectName("batteryLabel")
+        # Widget Space for Simulation
         self.simulationWidget = QtWidgets.QWidget(self.Base)
         self.simulationWidget.setGeometry(QtCore.QRect(121, 125, 551, 333))
         self.simulationWidget.setObjectName("simulationWidget")
+        # Widget Space for Map
         self.mapWidget = QtWidgets.QWidget(self.Base)
         self.mapWidget.setGeometry(QtCore.QRect(673, 126, 388, 221))
         self.mapWidget.setObjectName("mapWidget")
+        # Widget Space for Kinect
         self.kinectWidget = QtWidgets.QWidget(self.Base)
         self.kinectWidget.setGeometry(QtCore.QRect(673, 340, 388, 120))
         self.kinectWidget.setStyleSheet("border-color: rgb(85, 255, 255);")
@@ -779,7 +846,6 @@ class Ui_MainWindow(object):
         self.pwmButton.setText(_translate("MainWindow", "PWM"))
         self.otherControllerButton.setText(_translate("MainWindow", "Other"))
         self.noneControllerButton.setText(_translate("MainWindow", "None"))
-        self.terminalWidget.setTabText(self.terminalWidget.indexOf(self.urxvtWidget), _translate("MainWindow", "Terminal"))
         self.robotStartButton.setText(_translate("MainWindow", "START"))
         self.robotDownButton.setText(_translate("MainWindow", "SHUT DOWN"))
         self.rqtConsoleButton.setText(_translate("MainWindow", "RQT Console"))
@@ -797,13 +863,16 @@ class Ui_MainWindow(object):
         self.XLabel.setText(_translate("MainWindow", "X:"))
         self.YValue.setText(_translate("MainWindow", "Y:"))
         self.velocityLabel.setText(_translate("MainWindow", "Velocity:"))
-        self.velocityLabel_2.setText(_translate("MainWindow", "Battery:"))
+        self.batteryLabel.setText(_translate("MainWindow", "Battery:"))
 
 
 if __name__ == "__main__":
+    # rospy.init_node('turtleui')
+    # print('Running...')
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    # rospy.spin()

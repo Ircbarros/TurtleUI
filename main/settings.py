@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import sys
 import subprocess
@@ -178,7 +177,7 @@ class settings(QDialog):
         self.rosRootLabel.setGeometry(QtCore.QRect(5, 112, 81, 16))
         self.rosRootLabel.setStyleSheet("color: rgb(199, 199, 199);")
         self.rosRootLabel.setObjectName("rosRootLabel")
-        # Botão DEFAULT
+        # DEFAULT
         self.defaultButtonTab2 = QtWidgets.QPushButton(self.othersTab)
         self.defaultButtonTab2.setGeometry(QtCore.QRect(40, 355, 80, 23))
         self.defaultButtonTab2.setStyleSheet("color: rgb(199, 199, 199);")
@@ -204,11 +203,11 @@ class settings(QDialog):
         self.rosRootLabel.setBuddy(self.nameSpace)
         self.retranslateUi(envConfigDialog)
         self.tabbedConfig.setCurrentIndex(0)
-        # Botões de OK e CANCEL da TAB 1
+        # OK e CANCEL da TAB 1
         self.buttonBox.accepted.connect(self.okButton)
         self.buttonBox.rejected.connect(self.reject)
         self.defaultButton.clicked.connect(self.defaultXML)
-        # Botões de OK e CANCEL da TAB 2
+        # OK e CANCEL da TAB 2
         self.buttonBox_2.accepted.connect(self.okButton)
         self.buttonBox_2.rejected.connect(self.reject)
         self.defaultButtonTab2.clicked.connect(self.defaultXML)
