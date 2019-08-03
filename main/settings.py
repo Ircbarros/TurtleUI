@@ -308,25 +308,35 @@ class settings(QDialog):
         rosSource = root.findtext("ROS_SOURCE")
         rosEtc = root.findtext('ROS_ETC_DIRECTORY')
         rosRoot = root.findtext('ROS_ROOT')
+        exportMyIP = str('export ROS_MY_IP='+myIP)
+        exportMasterIP = str('export ROS_MASTER_IP='+masterIP)
         exportMasterIPURI = str('export ROS_MASTER_URI='+rosMasterURI)
-        exportRosIP = str('export ROS_IP='+myIP)
-        exportHostname = str('export ROS_HOSTNAME_IP='+myIP)
+        exportHostname = str('export ROS_HOSTNAME='+myIP)
         exportNamespace = str('export ROS_NAMESPACE='+rosNamespace)
         # Export the values to "~/.bashrc"
+        exportMyIPCommand = str("echo '"+exportMyIP+"' >> ~/.bashrc")
+        exportMasterIPCommand = str("echo '"+exportMasterIP+"' >> ~/.bashrc")
         exportIPURICommand = str("echo '"+exportMasterIPURI+"' >> ~/.bashrc")
-        exportRosIPCommand = str("echo '"+exportRosIP+"' >> ~/.bashrc")
         exportHostnameCommand = str("echo '"+exportHostname+"' >> ~/.bashrc")
         exportNamespaceCommand = str("echo '"+exportNamespace+"' >> ~/.bashrc")
+
+        print(exportMyIPCommand)
+        print(exportMasterIPCommand)
         print(exportIPURICommand)
-        print(exportRosIPCommand)
         print(exportHostnameCommand)
         print(exportNamespaceCommand)
-        # Using Popen instead of Call because the first one don't block the process
-        # BagProcess = subprocess.Popen(BagCommand, stdout=PIPE,
-        #                               stdin=PIPE, shell=True)
-        # BagProcStdout = BagProcess.communicate()[0].strip()
 
-        # CLOSE THE CONFIG MENU
+        exportMyIPProcess = subprocess.Popen(exportMyIPCommand, stdout=PIPE,
+                                             stdin=PIPE, shell=True)
+        exportMasterIPProcess = subprocess.Popen(exportMasterIPCommand, stdout=PIPE,
+                                                 stdin=PIPE, shell=True)
+        exportIPURIProcess = subprocess.Popen(exportIPURICommand, stdout=PIPE,
+                                              stdin=PIPE, shell=True)
+        exportHostnameProcess = subprocess.Popen(exportHostnameCommand, stdout=PIPE,
+                                                 stdin=PIPE, shell=True)
+        exportNamespaceProcess = subprocess.Popen(exportNamespaceCommand, stdout=PIPE,
+                                                 stdin=PIPE, shell=True) 
+        # Closes the Configuration Menu
         self.close()
 
     def defaultXML(self):
