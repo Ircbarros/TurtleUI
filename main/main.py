@@ -1,7 +1,7 @@
 # !/usr/bin/env python2
 
 import sys
-import rospy
+# import rospy
 import os
 import vectors
 import webbrowser
@@ -10,7 +10,7 @@ import subprocess
 import cv2
 from subprocess import call, Popen, PIPE, check_output
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, QThread, pyqtSignal
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QImage, QPixmap
 from concurrent.futures import ThreadPoolExecutor
@@ -204,12 +204,12 @@ class Ui_MainWindow(object):
             QTimer.singleShot(5000, lambda: self.robotStartButton.setDown(False))
             # For localserver use this code:
             minimalLaunch = 'roslaunch turtlebot_bringup minimal.launch '
-            kinectLaunch = 'roslaunch turtlebot_bringup 3dsensors.launch'
+            # kinectLaunch = 'roslaunch turtlebot_bringup 3dsensors.launch'
             # Using Popen instead of Call because the first one don't block the process
             launchProcess = subprocess.Popen(minimalLaunch, stdout=PIPE,
                                                stdin=PIPE, shell=True)
-            sensorsProcess = subprocess.Popen(kinectLaunch, stdout=PIPE,
-                                              stdin=PIPE, shell=True)
+            # sensorsProcess = subprocess.Popen(kinectLaunch, stdout=PIPE,
+                                              # stdin=PIPE, shell=True)
         elif (self.robotDownButton.isChecked() is True):
             print('Shutting Down the Turtlebot...')
             self.robotDownButton.setDown(True)
@@ -248,22 +248,18 @@ class Ui_MainWindow(object):
         if state == QtCore.Qt.Checked:
             print('Show Simulation Selected')
             # release video capture
-            self.cap = cv2.VideoCapture(1)
-            self.cap.release()
+            self.cap = cv2.VideoCapture(0)
             # read image in BGR format
-            ret, image = self.cap.read()
-            # convert image to RGB format
-            image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            # get image infos
-            height, width, channel = image.shape
-            step = channel * width
-            # create QImage from image
-            qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
-            # show image in img_label
-            self.mapWidget.setPixmap(QPixmap.fromImage(qImg))
+            ret, img = self.cap.read()
+            image = QtGui.QImage(img, img.shape[1], img.shape[0],
+                                 img.shape[1] * img.shape[2],
+                                 QtGui.QImage.Format_RGB888)
+            pixmap = QtGui.QPixmap()
+            pixmap.convertFromImage(image.rgbSwapped())
+            self.simulationWidget.setPixmap(pixmap)
         else:
             print('Show Simulation Unchecked')
-            self.cap = cv2.VideoCapture(0)
+            self.cap.release()
 
     def mapCheckbox(self, state):
 
@@ -779,18 +775,20 @@ class Ui_MainWindow(object):
                                            "color: rgb(206, 255, 188);")
         self.batteryLabel.setObjectName("batteryLabel")
         # Widget Space for Simulation
-        self.simulationWidget = QtWidgets.QWidget(self.Base)
-        self.simulationWidget.setGeometry(QtCore.QRect(121, 125, 551, 333))
+        self.simulationWidget = QtWidgets.QLabel(self.Base)
+        self.simulationWidget.setGeometry(QtCore.QRect(122, 122, 920, 338))
+        # self.simulationWidget.setGeometry(QtCore.QRect(121, 125, 551, 333))
         self.simulationWidget.setObjectName("simulationWidget")
         # Widget Space for Map
-        self.mapWidget = QtWidgets.QWidget(self.Base)
-        self.mapWidget.setGeometry(QtCore.QRect(673, 126, 388, 221))
-        self.mapWidget.setObjectName("mapWidget")
+        # self.mapWidget = QtWidgets.QLabel(self.Base)
+        # self.mapWidget.setGeometry(QtCore.QRect(673, 126, 388, 221))
+        # self.mapWidget.setObjectName("mapWidget")
         # Widget Space for Kinect
-        self.kinectWidget = QtWidgets.QWidget(self.Base)
-        self.kinectWidget.setGeometry(QtCore.QRect(673, 340, 388, 120))
-        self.kinectWidget.setStyleSheet("border-color: rgb(85, 255, 255);")
-        self.kinectWidget.setObjectName("kinectWidget")
+        # self.kinectWidget = QtWidgets.QLabel(self.Base)
+        # self.kinectWidget.setGeometry(QtCore.QRect(673, 340, 388, 120))
+        # self.kinectWidget.setStyleSheet("border-color: rgb(85, 255, 255);")
+        # self.kinectWidget.setObjectName("kinectWidget")
+        # Raise Widgets
         self.lateralMenuFrame.raise_()
         self.logoFrame.raise_()
         self.MenuLine.raise_()
@@ -814,8 +812,8 @@ class Ui_MainWindow(object):
         self.toolsFrame.raise_()
         self.valuesFrame.raise_()
         self.simulationWidget.raise_()
-        self.mapWidget.raise_()
-        self.kinectWidget.raise_()
+        # self.mapWidget.raise_()
+        # self.kinectWidget.raise_()
         MainWindow.setCentralWidget(self.Base)
 
         self.retranslateUi(MainWindow)

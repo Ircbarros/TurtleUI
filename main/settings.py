@@ -333,9 +333,9 @@ class settings(QDialog):
         # ENV CONFIG
         myIPValueDefault = str('150.165.167.105')
         masterIPValueDefault = str('150.165.167.105')
-        masterURIValueDefault = str('"http://150.165.167.105:11311"')
-        hostnameValueDefault = str('150.165.167.105')
-        nameSpaceValueDefault = str('"robot_0"')
+        masterURIValueDefault = str('http://localhost:11311')
+        hostnameValueDefault = str('localhost')
+        nameSpaceValueDefault = str('robot_0')
         # SSH CONNECTION
         turtlebotIPValueDefault = str(myIPValueDefault)
         userValueDefault = 'turtlebot'
@@ -400,7 +400,7 @@ class settings(QDialog):
         # exportMasterIP = str('MASTER_IP='+myIP)
         exportMasterIPURI = str('export ROS_MASTER_URI='+rosMasterURI)
         exportRosIP = str('export ROS_IP='+myIP)
-        exportHostname = str('export ROS_HOSTNAME_IP='+myIP)
+        exportHostname = str('export ROS_HOSTNAME='+rosHostname)
         exportNamespace = str('export ROS_NAMESPACE='+rosNamespace)
         # Export the values to "~/.bashrc"
         exportIPURICommand = str("echo "+exportMasterIPURI+" >> ~/.bashrc")
